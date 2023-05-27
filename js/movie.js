@@ -7,6 +7,8 @@ const SetMovie = (movies) =>{
 
     const divRow = document.getElementById('movie-box')
     for(const movie of movies){
+        const movieSpinner = document.getElementById('movie-spinner')
+        movieSpinner.style.display = 'none';
         const movieBox = document.createElement('div');
         const imgUrl = "https://image.tmdb.org/t/p/original/" + movie.poster_path;
         console.log(imgUrl)
@@ -27,5 +29,18 @@ const SetMovie = (movies) =>{
 const setDetails = (id) =>{
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=e81c2783a9982817dc6016178137f0cd`)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => SetMovieDetails (data))
+}
+
+const SetMovieDetails =(movie) =>{
+    console.log(movie);
+    const movieDetails = document.getElementById('movie-details');
+    movieDetails.innerHTML ="";
+    const movieDetailslBox = document.createElement('div');
+
+    movieDetails.innerHTML = `
+        <h3>${movie.original_title}</h3>
+    `
+    movieDetails.appendChild(movieDetailslBox);
+
 }
